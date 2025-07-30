@@ -5,6 +5,63 @@ import cloudinary from "cloudinary";
 
 
 
+
+export function generateFolderName() {
+  const now = new Date();
+
+  const pad = (n) => String(n).padStart(2, '0');
+  
+  const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  const time = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+
+  return `${date}_${time}`;
+}
+
+
+
+
+
+const cloudinary = require("cloudinary").v2;
+
+router.post("/upload", protectRoute, async (req, res) => {
+  try {
+    const userId = req.user._id.toString(); // get the user ID
+
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: `user_uploads/${userId}`, // use the user ID in folder name
+    });
+
+    res.json({ success: true, url: result.secure_url });
+  } 
+  catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+
+
+
+
+export async function uploadChunk(req, res) {
+
+  const file = req.file;
+
+  const fileUrl = getDataurl(file);
+
+  const cloud = await cloudinary.v2.uploader.upload(fileUrl.content);
+
+  res.json({
+    message: "Chunk Uploaded",
+  });
+};
+
+
+
+
+
+
+
+
 export async function createFolder(req, res) {
 
   const { title } = req.body;
