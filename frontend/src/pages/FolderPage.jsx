@@ -1,34 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Folder, 
-  File, 
-  FileText, 
-  Image, 
-  Music, 
-  Video, 
-  Archive,
-  ChevronLeft,
-  ChevronRight,
-  Home,
-  Search,
-  Grid3X3,
-  List,
-  MoreVertical,
-  ChevronDown,
-  HardDrive,
-  Star,
-  Clock,
-  Download,
-  FolderOpen,
-  Settings,
-  Maximize2,
-  Zap,
-  Sparkles
-} from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Folder, Music, Video, Search, FolderOpen, Zap, Sparkles } from 'lucide-react';
 
-const WindowsFolderViewer = () => {
+
+
+const FolderPage = () => {
   const [currentPath, setCurrentPath] = useState(['This PC']);
-  const [viewMode, setViewMode] = useState('grid');
   const [selectedItems, setSelectedItems] = useState(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -49,140 +25,12 @@ const WindowsFolderViewer = () => {
     'This PC': {
       type: 'folder',
       children: {
-        'Desktop': { type: 'folder', children: {
-          'New Document.txt': { type: 'file', extension: 'txt', size: '2 KB', modified: '2025-01-15' },
-          'Screenshot.png': { type: 'file', extension: 'png', size: '1.2 MB', modified: '2025-01-14' },
-          'Notes.txt': { type: 'file', extension: 'txt', size: '854 bytes', modified: '2025-01-13' },
-          'Shortcuts': { type: 'folder', children: {
-            'Chrome.lnk': { type: 'file', extension: 'lnk', size: '2 KB', modified: '2025-01-10' },
-            'VS Code.lnk': { type: 'file', extension: 'lnk', size: '2 KB', modified: '2025-01-10' },
-            'Spotify.lnk': { type: 'file', extension: 'lnk', size: '2 KB', modified: '2025-01-09' },
-          }},
-          'Project Files': { type: 'folder', children: {
-            'index.html': { type: 'file', extension: 'html', size: '4 KB', modified: '2025-01-12' },
-            'style.css': { type: 'file', extension: 'css', size: '2 KB', modified: '2025-01-12' },
-            'script.js': { type: 'file', extension: 'js', size: '8 KB', modified: '2025-01-12' },
-            'assets': { type: 'folder', children: {
-              'logo.png': { type: 'file', extension: 'png', size: '45 KB', modified: '2025-01-11' },
-              'background.jpg': { type: 'file', extension: 'jpg', size: '234 KB', modified: '2025-01-11' },
-              'icon.svg': { type: 'file', extension: 'svg', size: '12 KB', modified: '2025-01-11' },
-            }},
-            'README.md': { type: 'file', extension: 'md', size: '3 KB', modified: '2025-01-10' },
-          }}
-        }},
-        'Documents': { type: 'folder', children: {
-          'Resume.pdf': { type: 'file', extension: 'pdf', size: '156 KB', modified: '2025-01-10' },
-          'Budget.xlsx': { type: 'file', extension: 'xlsx', size: '24 KB', modified: '2025-01-08' },
-          'Presentation.pptx': { type: 'file', extension: 'pptx', size: '2.1 MB', modified: '2025-01-05' },
-          'Personal': { type: 'folder', children: {
-            'Journal.docx': { type: 'file', extension: 'docx', size: '45 KB', modified: '2025-01-05' },
-            'Ideas.txt': { type: 'file', extension: 'txt', size: '12 KB', modified: '2025-01-04' },
-            'Goals 2025.pdf': { type: 'file', extension: 'pdf', size: '89 KB', modified: '2025-01-01' },
-          }},
-          'Work': { type: 'folder', children: {
-            'Report.docx': { type: 'file', extension: 'docx', size: '89 KB', modified: '2025-01-03' },
-            'Data.csv': { type: 'file', extension: 'csv', size: '45 KB', modified: '2025-01-01' },
-            'Meetings': { type: 'folder', children: {
-              'Q1 Planning.pptx': { type: 'file', extension: 'pptx', size: '1.2 MB', modified: '2024-12-28' },
-              'Team Notes.docx': { type: 'file', extension: 'docx', size: '34 KB', modified: '2024-12-27' },
-              'Action Items.xlsx': { type: 'file', extension: 'xlsx', size: '18 KB', modified: '2024-12-26' },
-            }},
-            'Templates': { type: 'folder', children: {
-              'Invoice Template.xlsx': { type: 'file', extension: 'xlsx', size: '67 KB', modified: '2024-12-20' },
-              'Letter Template.docx': { type: 'file', extension: 'docx', size: '23 KB', modified: '2024-12-19' },
-              'Proposal Template.pptx': { type: 'file', extension: 'pptx', size: '456 KB', modified: '2024-12-18' },
-            }}
-          }}
-        }},
-        'Downloads': { type: 'folder', children: {
-          'installer.exe': { type: 'file', extension: 'exe', size: '45 MB', modified: '2025-01-14' },
-          'music.mp3': { type: 'file', extension: 'mp3', size: '3.2 MB', modified: '2025-01-13' },
-          'video.mp4': { type: 'file', extension: 'mp4', size: '128 MB', modified: '2025-01-12' },
-          'archive.zip': { type: 'file', extension: 'zip', size: '15 MB', modified: '2025-01-11' },
-          'Software': { type: 'folder', children: {
-            'Chrome Setup.exe': { type: 'file', extension: 'exe', size: '89 MB', modified: '2025-01-10' },
-            'Discord Setup.exe': { type: 'file', extension: 'exe', size: '67 MB', modified: '2025-01-09' },
-            'Node.js Installer.msi': { type: 'file', extension: 'msi', size: '32 MB', modified: '2025-01-08' },
-          }},
-          'Temp': { type: 'folder', children: {
-            'temp1.tmp': { type: 'file', extension: 'tmp', size: '234 KB', modified: '2025-01-14' },
-            'cache.dat': { type: 'file', extension: 'dat', size: '1.2 MB', modified: '2025-01-13' },
-            'log.txt': { type: 'file', extension: 'txt', size: '456 KB', modified: '2025-01-12' },
-          }}
-        }},
-        'Pictures': { type: 'folder', children: {
-          'family.jpg': { type: 'file', extension: 'jpg', size: '1.5 MB', modified: '2024-12-25' },
-          'profile.png': { type: 'file', extension: 'png', size: '856 KB', modified: '2025-01-01' },
-          'screenshot_2025.png': { type: 'file', extension: 'png', size: '2.3 MB', modified: '2025-01-15' },
-          'Vacation': { type: 'folder', children: {
-            'beach1.jpg': { type: 'file', extension: 'jpg', size: '2.1 MB', modified: '2024-12-20' },
-            'beach2.jpg': { type: 'file', extension: 'jpg', size: '1.8 MB', modified: '2024-12-20' },
-            'sunset.png': { type: 'file', extension: 'png', size: '3.2 MB', modified: '2024-12-21' },
-            'memories.txt': { type: 'file', extension: 'txt', size: '5 KB', modified: '2024-12-22' },
-          }},
-          'Events': { type: 'folder', children: {
-            'Birthday Party': { type: 'folder', children: {
-              'group_photo.jpg': { type: 'file', extension: 'jpg', size: '3.4 MB', modified: '2024-11-15' },
-              'cake.jpg': { type: 'file', extension: 'jpg', size: '2.1 MB', modified: '2024-11-15' },
-              'celebration.mp4': { type: 'file', extension: 'mp4', size: '45 MB', modified: '2024-11-15' },
-            }},
-            'Wedding': { type: 'folder', children: {
-              'ceremony.jpg': { type: 'file', extension: 'jpg', size: '4.2 MB', modified: '2024-10-12' },
-              'reception.jpg': { type: 'file', extension: 'jpg', size: '3.8 MB', modified: '2024-10-12' },
-              'highlights.mp4': { type: 'file', extension: 'mp4', size: '156 MB', modified: '2024-10-12' },
-            }}
-          }},
-          'Screenshots': { type: 'folder', children: {
-            'desktop_capture.png': { type: 'file', extension: 'png', size: '1.2 MB', modified: '2025-01-14' },
-            'error_message.png': { type: 'file', extension: 'png', size: '456 KB', modified: '2025-01-13' },
-            'tutorial_step1.png': { type: 'file', extension: 'png', size: '789 KB', modified: '2025-01-12' },
-          }}
-        }},
-        'Music': { type: 'folder', children: {
-          'playlist.m3u': { type: 'file', extension: 'm3u', size: '1 KB', modified: '2024-12-18' },
-          'recently_played.txt': { type: 'file', extension: 'txt', size: '3 KB', modified: '2025-01-14' },
-          'Favorites': { type: 'folder', children: {
-            'song1.mp3': { type: 'file', extension: 'mp3', size: '4.2 MB', modified: '2024-12-15' },
-            'song2.mp3': { type: 'file', extension: 'mp3', size: '3.8 MB', modified: '2024-12-16' },
-            'acoustic_version.mp3': { type: 'file', extension: 'mp3', size: '5.1 MB', modified: '2024-12-17' },
-            'live_recording.mp3': { type: 'file', extension: 'mp3', size: '6.3 MB', modified: '2024-12-18' },
-          }},
-          'Albums': { type: 'folder', children: {
-            'Rock Collection': { type: 'folder', children: {
-              'track01.mp3': { type: 'file', extension: 'mp3', size: '4.5 MB', modified: '2024-11-20' },
-              'track02.mp3': { type: 'file', extension: 'mp3', size: '3.9 MB', modified: '2024-11-20' },
-              'track03.mp3': { type: 'file', extension: 'mp3', size: '4.1 MB', modified: '2024-11-20' },
-              'album_art.jpg': { type: 'file', extension: 'jpg', size: '234 KB', modified: '2024-11-20' },
-            }},
-            'Jazz Essentials': { type: 'folder', children: {
-              'smooth_jazz.mp3': { type: 'file', extension: 'mp3', size: '5.2 MB', modified: '2024-10-15' },
-              'blues_night.mp3': { type: 'file', extension: 'mp3', size: '4.8 MB', modified: '2024-10-15' },
-              'saxophone_solo.mp3': { type: 'file', extension: 'mp3', size: '3.7 MB', modified: '2024-10-15' },
-            }}
-          }}
-        }},
-        'Videos': { type: 'folder', children: {
-          'tutorial.mp4': { type: 'file', extension: 'mp4', size: '245 MB', modified: '2024-12-10' },
-          'meeting_recording.avi': { type: 'file', extension: 'avi', size: '156 MB', modified: '2024-12-05' },
-          'funny_clip.mp4': { type: 'file', extension: 'mp4', size: '23 MB', modified: '2025-01-12' },
-          'Movies': { type: 'folder', children: {
-            'action_movie.mp4': { type: 'file', extension: 'mp4', size: '1.2 GB', modified: '2024-11-28' },
-            'comedy_special.mkv': { type: 'file', extension: 'mkv', size: '890 MB', modified: '2024-11-25' },
-            'documentary.avi': { type: 'file', extension: 'avi', size: '1.5 GB', modified: '2024-11-20' },
-          }},
-          'Tutorials': { type: 'folder', children: {
-            'Programming': { type: 'folder', children: {
-              'react_basics.mp4': { type: 'file', extension: 'mp4', size: '234 MB', modified: '2024-12-01' },
-              'javascript_advanced.mp4': { type: 'file', extension: 'mp4', size: '345 MB', modified: '2024-12-02' },
-              'css_animations.mp4': { type: 'file', extension: 'mp4', size: '178 MB', modified: '2024-12-03' },
-            }},
-            'Design': { type: 'folder', children: {
-              'photoshop_tips.mp4': { type: 'file', extension: 'mp4', size: '289 MB', modified: '2024-11-30' },
-              'ui_ux_principles.mp4': { type: 'file', extension: 'mp4', size: '456 MB', modified: '2024-11-29' },
-              'color_theory.mp4': { type: 'file', extension: 'mp4', size: '167 MB', modified: '2024-11-28' },
-            }}
-          }}
-        }}
+        /*'Desktop': { type: 'folder', children: {}},
+        'Documents': { type: 'folder', children: {}},
+        'Downloads': { type: 'folder', children: {}},
+        'Pictures': { type: 'folder', children: {}},
+        'Music': { type: 'folder', children: {}},
+        'Videos': { type: 'folder', children: {}}*/
       }
     }
   };
@@ -230,23 +78,14 @@ const WindowsFolderViewer = () => {
     setSelectedItems(new Set());
   };
 
-  const navigateBack = () => {
-    if (currentPath.length > 1) {
-      setCurrentPath(currentPath.slice(0, -1));
-      setSelectedItems(new Set());
-    }
-  };
 
-  const navigateToPath = (index) => {
-    setCurrentPath(currentPath.slice(0, index + 1));
-    setSelectedItems(new Set());
-  };
 
   const toggleItemSelection = (itemName) => {
     const newSelected = new Set(selectedItems);
     if (newSelected.has(itemName)) {
       newSelected.delete(itemName);
-    } else {
+    } 
+    else {
       newSelected.add(itemName);
     }
     setSelectedItems(newSelected);
@@ -263,63 +102,16 @@ const WindowsFolderViewer = () => {
     name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
+
+
 
   return (
-    <div className="h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black flex flex-col overflow-hidden relative">
-      {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
-          className="absolute w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"
-          style={{
-            left: mousePosition.x * 0.01 + '%',
-            top: mousePosition.y * 0.01 + '%',
-            transform: 'translate(-50%, -50%)'
-          }}
-        />
-        <div 
-          className="absolute w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"
-          style={{
-            right: (window.innerWidth - mousePosition.x) * 0.01 + '%',
-            bottom: (window.innerHeight - mousePosition.y) * 0.01 + '%',
-            transform: 'translate(50%, 50%)'
-          }}
-        />
-      </div>
+    <div className="h-screen bg-black flex flex-col overflow-hidden relative  playfair-font ">
+
 
       {/* Window Title Bar */}
-      <div className="bg-gray-800/60 backdrop-blur-xl border-b border-gray-700/50 px-4 py-3 shadow-2xl relative z-10">
+      <div className="bg-red-950 backdrop-blur-xl border-b border-gray-700/50 px-4 py-3 shadow-2xl relative z-10">
         <div className="flex items-center justify-between">
-
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`group p-2.5 rounded-xl transition-all duration-300 hover:scale-110 ${
-                viewMode === 'grid' 
-                  ? 'bg-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/25 animate-pulse' 
-                  : 'hover:bg-gray-700/50 text-gray-400 hover:text-cyan-400'
-              }`}
-            >
-              <Grid3X3 className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              className={`group p-2.5 rounded-xl transition-all duration-300 hover:scale-110 ${
-                viewMode === 'list' 
-                  ? 'bg-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/25 animate-pulse' 
-                  : 'hover:bg-gray-700/50 text-gray-400 hover:text-cyan-400'
-              }`}
-            >
-              <List className="w-4 h-4" />
-            </button>
-          </div>
 
           {/* Search Bar */}
           <div className="flex items-center space-x-3">
@@ -352,16 +144,14 @@ const WindowsFolderViewer = () => {
       <div className="flex-1 overflow-auto p-6 relative z-10">
         {filteredItems.length === 0 ? (
           <div className="text-center text-gray-400 mt-20">
-            <div className="bg-gray-800/30 backdrop-blur-xl rounded-3xl p-12 max-w-md mx-auto shadow-2xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105">
+            <div className=" rounded-3xl p-12 max-w-md mx-auto shadow-2xl   transition-all duration-500 hover:scale-105">
               <div className="relative">
-                <Folder className="w-24 h-24 mx-auto mb-6 text-gray-600 animate-bounce" />
-                <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-2xl animate-pulse"></div>
+                <img src="/Folder.png" className="animate-bounce"/>
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-gray-200">This folder is empty</h3>
-              <p className="text-sm text-gray-500">The void awaits your files...</p>
+              <h3 className="text-lg font-semibold mb-2 text-gray-200 2xl:text-4xl">This folder is empty</h3>
             </div>
           </div>
-        ) : viewMode === 'grid' ? (
+        ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-6">
             {filteredItems.map(([name, item]) => (
               <div
@@ -408,39 +198,6 @@ const WindowsFolderViewer = () => {
               </div>
             ))}
           </div>
-        ) : (
-          <div className="bg-gray-800/30 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-gray-700/50">
-            <div className="grid grid-cols-12 gap-4 px-6 py-4 text-sm font-semibold text-gray-300 border-b border-gray-700/50 bg-gray-700/20">
-              <div className="col-span-5">Name</div>
-              <div className="col-span-3">Size</div>
-            </div>
-            <div className="divide-y divide-gray-700/30">
-              {filteredItems.map(([name, item]) => (
-                <div
-                  key={name}
-                  onClick={() => toggleItemSelection(name)}
-                  onDoubleClick={() => handleItemDoubleClick(name, item)}
-                  onMouseEnter={() => setHoveredItem(name)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  className={`group grid grid-cols-12 gap-4 px-6 py-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
-                    selectedItems.has(name) 
-                      ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-l-4 border-cyan-400 shadow-lg' 
-                      : 'hover:bg-gray-700/30 hover:shadow-lg'
-                  }`}
-                >
-                  <div className="col-span-5 flex items-center space-x-4">
-                    {getFileIcon(item, name)}
-                    <span className="text-sm font-medium truncate text-gray-200 group-hover:text-cyan-300 transition-colors duration-300">{name}</span>
-                  </div>
-
-                  
-                  <div className="col-span-10 bg-black flex items-center text-sm text-gray-400  group-hover:text-gray-300 transition-colors duration-300">
-                    {item.type === 'file' ? item.size : '—'}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         )}
       </div>
 
@@ -466,4 +223,6 @@ const WindowsFolderViewer = () => {
   );
 };
 
-export default WindowsFolderViewer;
+
+
+export default FolderPage;
