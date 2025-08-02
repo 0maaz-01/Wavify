@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Folder, Music, Video, Search, FolderOpen, Zap, Sparkles, ArrowLeft, ChevronLeft, Check } from 'lucide-react';
+import { Music, Video, Zap, Sparkles, Check } from 'lucide-react';
 
 
 
@@ -8,10 +8,9 @@ const FolderPage = () => {
   const [selectedItems, setSelectedItems] = useState(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-  // Mouse tracking for interactive effects
+
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -20,12 +19,12 @@ const FolderPage = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Mock file system data
+
   const fileSystem = {
     'This PC': {
       type: 'folder',
       children: {
-        'Desktop': { type: 'folder', children: {}},
+        /*('Desktop': { type: 'folder', children: {}},
         'Documents': { type: 'folder', children: {}},
         'Downloads': { type: 'folder', children: {}},
         'Pictures': { type: 'folder', children: {}},
@@ -50,10 +49,41 @@ const FolderPage = () => {
         'Meetings': { type: 'folder', children: {} },
         'Ideas': { type: 'folder', children: {} },
         'Logs': { type: 'folder', children: {} },
-        'Configs': { type: 'folder', children: {} },
+        'Configs': { type: 'folder', children: {} }*/
+
+
+        'Desktop': { type: 'chunk', children: {} },
+        'Documents': { type: 'chunk', children: {} },
+        'Downloads': { type: 'chunk', children: {} },
+        'Pictures': { type: 'chunk', children: {} },
+        'Music': { type: 'chunk', children: {} },
+        'Videos': { type: 'chunk', children: {} },
+        'Projects': { type: 'chunk', children: {} },
+        'Work': { type: 'chunk', children: {} },
+        'Personal': { type: 'chunk', children: {} },
+        'Archive': { type: 'chunk', children: {} },
+        'Backups': { type: 'chunk', children: {} },
+        'Templates': { type: 'chunk', children: {} },
+        'Screenshots': { type: 'chunk', children: {} },
+        'Notes': { type: 'chunk', children: {} },
+        'Invoices': { type: 'chunk', children: {} },
+        'Presentations': { type: 'chunk', children: {} },
+        'Research': { type: 'chunk', children: {} },
+        'Books': { type: 'chunk', children: {} },
+        'Code': { type: 'chunk', children: {} },
+        'Snippets': { type: 'chunk', children: {} },
+        'Courses': { type: 'chunk', children: {} },
+        'Clients': { type: 'chunk', children: {} },
+        'Meetings': { type: 'chunk', children: {} },
+        'Ideas': { type: 'chunk', children: {} },
+        'Logs': { type: 'chunk', children: {} },
+        'Configs': { type: 'chunk', children: {} },
+
       }
     }
   };
+
+
 
   const getFileIcon = (item, name) => {
     const isHovered = hoveredItem === name;
@@ -64,26 +94,14 @@ const FolderPage = () => {
         : <img src ="/Folder.png"/>;
     }
 
-    const ext = item.extension?.toLowerCase();
-    const baseClasses = "w-8 h-8 transition-all duration-300";
-    const hoverClasses = isHovered ? "scale-110 drop-shadow-lg" : "";
-    
-    switch (ext) {
-      case 'mp3':
-      case 'wav':
-      case 'flac':
-      case 'm3u':
-        return <Music className={`${baseClasses} ${hoverClasses} text-purple-400`} />;
-      case 'mp4':
-      case 'avi':
-      case 'mkv':
-      case 'mov':
-        return <Video className={`${baseClasses} ${hoverClasses} text-orange-400`} />;
-      default:
-        return <img src="/Folder.png" className="size-20"/>
-        // return <File className={`${baseClasses} ${hoverClasses} text-gray-400`} />;
+    if (item.type === 'chunk'){
+      return isHovered 
+        ? <img src ="/Chunk.png"/>
+        : <img src ="/Chunk.png"/>;
     }
   };
+
+
 
   const getCurrentFolder = () => {
     let current = fileSystem;
@@ -141,21 +159,19 @@ const FolderPage = () => {
 
 
           {/* Search Bar */}
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-end  ">
               <div className="flex items-center space-x-3  ">
                 <div className="relative  ">
-                  <Search className={`w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
-                    isSearchFocused ? ' scale-110' : 'text-gray-400'
-                  }`} />
+
                   <input
                     type="text"
                     placeholder="Search Folder"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsSearchFocused(true)}
 
-                    className="pl-10 pr-4 py-2.5 border border-gray-600/50 rounded-xl text-sm w-64  bg-white/10 backdrop-blur-lg text-gray-200 placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-red-500/50  transition-all duration-300 "
+                    className="pl-4 pr-4 py-2.5 border border-gray-600/50 rounded-xl text-sm w-64  bg-white/10 backdrop-blur-lg text-gray-200 placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-red-500/50  transition-all duration-300 "
                   />
+
                   {searchQuery && (
                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
                       <Sparkles className="w-4 h-4 text-red-500 animate-spin" />
@@ -175,9 +191,9 @@ const FolderPage = () => {
           <div className="text-center text-gray-400 mt-20">
             <div className=" rounded-3xl p-12 max-w-md mx-auto shadow-2xl   transition-all duration-500 hover:scale-110 scale-105">
               <div className="relative flex items-center justify-center">
-                <img src="/Folder.png" className="animate-bounce  max-w-[200px]   sm:max-w-[250px]   md:max-w-[300px] lg:max-w-[350px]"/>
+                  <img src="/Folder.png" className="animate-bounce  max-w-[200px]   sm:max-w-[250px]   md:max-w-[300px] lg:max-w-[350px]"/>
               </div>
-              <h3 className=" font-semibold mb-2 text-gray-200    text-2xl    sm:text-4xl">This folder is empty</h3>
+              <h3 className=" font-semibold mb-2 text-gray-200    text-2xl    sm:text-4xl">No folder found</h3>
             </div>
           </div>
         ) : (
