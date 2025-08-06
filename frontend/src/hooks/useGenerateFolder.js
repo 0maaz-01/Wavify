@@ -3,11 +3,12 @@ import { generateFolder } from "../lib/videos";
 
 
 const useGenerateFolder = () => {
-  const { mutate, isPending, error } = useMutation({
+  const { mutateAsync, isPending, error } = useMutation({
     mutationFn: generateFolder,
   });
 
-  return { error, isPending, generateFolderMutation : mutate };
+  return { error, isPending, generateFolderMutation: mutateAsync };
 };
+
 
 export default useGenerateFolder;
