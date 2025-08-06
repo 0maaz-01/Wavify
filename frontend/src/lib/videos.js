@@ -1,9 +1,10 @@
 import { axiosInstance } from "./axios";
 
 
-
-
 export const uploadChunk = async (chunk) => {
+    const formData = new FormData();
+    formData.append("chunk", chunk);
+
     const response = await axiosInstance.post("/video/upload-chunks", chunk);
     return response.data;
 }
@@ -22,6 +23,7 @@ export const getChunks = async () => {
 
 
 export const getAllFolders = async () => {
-    const response = await axiosInstance.get("/video/get-all-folders")
-    return response.data
+    const response = await axiosInstance.get("/video/get-all-folders");
+    if (!response.data.success) throw new Error(response.data.message);
+    return response.data.folders;
 }
