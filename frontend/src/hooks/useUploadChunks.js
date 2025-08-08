@@ -1,13 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { uploadChunk } from "../lib/videos";
 
 
 const useUploadChunks = () => {
-  const { mutate, isPending, error } = useMutation({
+  return useMutation({
     mutationFn: uploadChunk,
   });
-
-  return { error, isPending, uploadChunksMutation: mutate };
 };
 
 export default useUploadChunks;
