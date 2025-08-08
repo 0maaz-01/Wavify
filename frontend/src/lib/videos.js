@@ -1,13 +1,19 @@
 import { axiosInstance } from "./axios";
 
 
-export const uploadChunk = async (chunk) => {
+export const uploadChunk = async ({chunks, count}) => {
     const formData = new FormData();
-    formData.append("chunk", chunk);
-
-    const response = await axiosInstance.post("/video/upload-chunks", chunk);
+    // console.log(count)
+    chunks.forEach((chunk, i) => {
+        // const value = `${(count * 10) + i}.webm`
+        formData.append("chunk", chunk, `${(count * 10) + (i + 1)}.webm`);
+        // console.log(value)
+    });
+    const response = await axiosInstance.post("/video/upload-chunks", formData);
     return response.data;
 }
+
+
 
 
 export const generateFolder = async () => {
