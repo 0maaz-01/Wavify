@@ -1,15 +1,21 @@
 import { Play, Download  } from 'lucide-react';
 import Button from './Button';
+import { SharedStatesData } from '../context/useSharedStates';
+import { FunctionData } from '../context/Function';
 
 
 
-export default function BottomBar({ isMobile, isLoaded, allRecordings, showAllRecordings, isBottomDrawerOpen, toggleBottomDrawer, recordings, formatTime, formatFileSize, playRecording,   downloadRecording}) {
+export default function BottomBar() {
+
+  const { isMobile, isLoaded, allRecordings, isBottomDrawerOpen, recordings } = SharedStatesData();
+
+  const { formatTime, showAllRecordings, toggleBottomDrawer, formatFileSize, playRecording, downloadRecording } = FunctionData();
 
   return (
     <div className=" relative    playfair-font">
 
       {/* Bottom Drawer */}
-      <div className={`fixed bottom-0 overflow-auto  left-0 right-0 h-60 bg-black border-t-amber-600 border-t-2 text-white shadow-lg transform transition-all duration-700 ease-out z-50 ${
+      <div className={`fixed bottom-0 overflow-auto  left-0 right-0 h-60 bg-[#1A1A1A] border-t-white/20 border-t text-white shadow-lg transform transition-all duration-700 ease-out z-50 ${
         isBottomDrawerOpen ? 'translate-y-0' : 'translate-y-full'
       } ${!isMobile && isLoaded && isBottomDrawerOpen ? 'translate-y-0 opacity-100' : !isMobile && isBottomDrawerOpen ? 'translate-y-full opacity-0' : 'opacity-100'}
         ${allRecordings? "top-0 h-full translate-y-0  transform transition-all duration-700 ease-in" : "bottom-0 h-60"}
@@ -34,7 +40,7 @@ export default function BottomBar({ isMobile, isLoaded, allRecordings, showAllRe
                                 {recordings.map((recording) => (
                                   <div
                                     key={recording.id}
-                                    className=" rounded-lg p-4 flex items-center  justify-between bg-black-200  transition-colors"
+                                    className="bg-white/10 rounded-lg p-4 flex items-center  justify-between bg-black-200  transition-colors"
                                   >
                                     <div className="flex-1">
                                       <div className="font-semibold ">
