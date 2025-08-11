@@ -1,12 +1,17 @@
 
 import Button from "./Button";
-import { reassembleAndDownload, clearAllChunks, clearDatabase   } from "../lib/db";
+import { reassembleAndDownload, clearDatabase   } from "../lib/db";
 import { Button2 } from "./Button2";
+import { Download, Trash2 } from "lucide-react";
+import { SharedStatesData } from "../context/useSharedStates";
+import { FunctionData } from "../context/Function";
 
+export default function RightSideBar({}) {
 
-export default function RightSideBar({isRightSidebarOpen, isMobile, isLoaded, toggleRightSidebar, setIsRightSidebarOpen, selectedDevices, setSelectedDevices, availableDevices}) {
-
-
+  const { isRightSidebarOpen, isMobile, isLoaded, selectedDevices, setSelectedDevices, availableDevices
+        } = SharedStatesData();
+  
+  const { toggleRightSidebar} = FunctionData();
 
   /*const Button2 = ({text}) => (
       <button
@@ -124,9 +129,8 @@ export default function RightSideBar({isRightSidebarOpen, isMobile, isLoaded, to
                       </select>
                   </div>
 
-                  <Button2  text="Download"        func={reassembleAndDownload}/>
-                  <Button2  text="Remove Chunk"    func={clearAllChunks}/>
-                  <Button2  text="Empty Storage"   func={clearDatabase}/>
+                  <Button2  text="Full Podcast"        func={reassembleAndDownload}        icon={<Download className="size-5"/>}/>
+                  <Button2  text="Local Chunks"    func={clearDatabase}                icon={<Trash2   className="size-5"/>}/>
               </li>
          
           </ul>
