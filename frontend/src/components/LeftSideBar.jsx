@@ -1,17 +1,21 @@
-import { Home, User, Settings, Mail, FileText } from 'lucide-react';
+import { FunctionData } from '../context/Function';
+import { SharedStatesData } from '../context/useSharedStates';
 import Button from './Button';
 
 
 
-export default function LeftSideBar({isLeftSidebarOpen,   isMobile,   isLoaded,   toggleLeftSidebar,    setIsLeftSidebarOpen }) {
+export default function LeftSideBar() {
+
+  const { isLeftSidebarOpen,   isMobile,   isLoaded,   setIsLeftSidebarOpen } = SharedStatesData();
+  const { toggleLeftSidebar } = FunctionData();
 
 
   const leftMenuItems = [
-    { icon: Home, label: 'Dashboard', href: '#' },
-    { icon: User, label: 'Profile', href: '#' },
-    { icon: FileText, label: 'Documents', href: '#' },
-    { icon: Mail, label: 'Messages', href: '#' },
-    { icon: Settings, label: 'Settings', href: '#' },
+    { icon: "/Folder.png", label: 'Chunks', href: '#' },
+    { icon: "/Audio.png", label: 'Recordings', href: '#' },
+    { icon: "/Chunks.png", label: 'Videos', href: '#' },
+    { icon: "/Recording.png", label: 'Audios', href: '#' },
+    { icon: "/Video.png", label: 'Settings', href: '#' },
   ];
 
 
@@ -51,7 +55,7 @@ export default function LeftSideBar({isLeftSidebarOpen,   isMobile,   isLoaded, 
                     }
                   }}
                 >
-                  <item.icon size={20} />
+                  <img src={item.icon}   className="sm:size-16  size-12" />
                   <span className="font-medium">{item.label}</span>
                 </a>
               </li>
