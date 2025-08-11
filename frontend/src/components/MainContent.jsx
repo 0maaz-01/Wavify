@@ -1,68 +1,83 @@
 import { Camera, Square, Play, AlertCircle, Pause, CameraOff, Mic, MicOff, FastForward  } from 'lucide-react';
 import Button from './Button';
+import useLogout from '../hooks/useLogout';
+import useGenerateFolder from '../hooks/useGenerateFolder';
+import Loader from './Loader';
+import { FunctionData } from '../context/Function';
+import { SharedStatesData } from '../context/useSharedStates';
 
 
-export default function MainContent({isMobile,  isLoaded,  toggleLeftSidebar,  toggleRightSidebar,  videoRef,  toggleBottomDrawer,  error,  isRecording,  streamRef,  resumeRecording,
-                                     pauseRecording,  stopRecording,  toggleCamera,   cameraEnabled,   micEnabled,  toggleMicrophone,  status,  formatTime, recordingTime,
-                                     startRecording, isPaused
-                                    }) {
+export default function MainContent() {
+
+
+  const { logoutMutation } = useLogout();
+  const { generateFolderMutation, isPending, error } = useGenerateFolder();
+
+  const { isMobile, isRecording, isPaused, isLoaded, videoRef, error2, streamRef, cameraEnabled, 
+            micEnabled, status, recordingTime,
+        } = SharedStatesData();
+
+  const { pauseRecording, stopRecording,  toggleCamera, toggleMicrophone, formatTime, startRecording, toggleLeftSidebar, 
+          toggleRightSidebar, toggleBottomDrawer, resumeRecording } = FunctionData();
+
+
+  const createFolder = async () => {
+    try {
+      await generateFolderMutation({ name: "New Folder" });
+      startRecording(); // ✅ only runs after folder is created
+    } 
+    catch (err) {
+      console.error("Error creating folder", err);
+    }
+  };
+
+
 
     const buttons = [
       { 
         id: 1,
-        func: startRecording,
+        func: createFolder,
         disable: isRecording || !streamRef.current,
         icon: <Play className="w-4 h-4   "/>,
-        clas: "bg-black-100  disabled:text-black  hover:text-black  text-[#40E0D0] group-hover:text-black  disabled:bg-[#40E0D0]  disabled:hover:scale-100  hover:bg-[#40E0D0] group transition-all duration-200 transform hover:scale-105  "
+        clas: "     group-hover:text-black  disabled:hidden   hover:bg-[#40E0D0] group transition-all duration-200 transform hover:scale-105  "
       },
       {
         id: 2,
         func: isPaused ? resumeRecording : pauseRecording,
         disable: "",
         icon: (isPaused ? <FastForward className="w-4 h-4   " /> : <Pause className="w-4 h-4   " />),
-        clas: "bg-black-100  text-yellow-300  hover:text-black hover:bg-yellow-300  transition-all duration-200 transform hover:scale-105"
+        clas: "       transition-all duration-200 transform hover:scale-105"
       },
       {
         id: 3,
         func: stopRecording,
         disable: !isRecording,
         icon: <Square className="w-4 h-4  " />,
-        clas: "bg-black-100  text-[#FF0000]  hover:text-white  hover:bg-red-600   transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
+        clas: "        transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
       },
       {
         id: 4,
         func: toggleCamera,
         disable: isRecording || !streamRef.current,
         icon: cameraEnabled ?   <Camera className="w-4 h-4" /> : <CameraOff className="w-4 h-4" />,
-        clas: ` transition-colors  transition-all duration-500 transform ${
-                                  cameraEnabled 
-                                    ? 'bg-black-100 text-white hover:bg-white hover:text-black ' 
-                                    : 'bg-white text-black '
-                                }`
+        clas: ` transition-colors  transition-all duration-500 transform ${ cameraEnabled ? '    ' : ' text-black '}`
       },
       {
         id: 5,
         func: toggleMicrophone,
         disable: "",
         icon: micEnabled ?   <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />,
-        clas: ` transition-colors ${
-                                  micEnabled 
-                                    ? 'bg-black-100  text-[#00FF00]  hover:text-black    hover:bg-[#00FF00]' 
-                                    : 'bg-[#00FF00]   text-black    '
-                                }`
+        clas: ` transition-colors ${ micEnabled ? '      ' : ' text-black' }`
       },
     ];
                           
          
 
 
-
-
-
   return (
       <div className="">
         {/* Top Bar */}
-        <header className={`bg-black    shadow-sm border-b  sticky top-0 z-30 transform transition-all duration-700 ease-out ${
+        <header className={` bg-[#262626]   shadow-sm border-b border-white/20 sticky top-0 z-30 transform transition-all duration-700 ease-out ${
           !isMobile && isLoaded 
             ? 'translate-y-0 opacity-100' 
             : !isMobile 
@@ -71,7 +86,8 @@ export default function MainContent({isMobile,  isLoaded,  toggleLeftSidebar,  t
         }`}>
           <div className="flex items-center px-4 py-3 ">
             <Button func={toggleLeftSidebar} icon="Menu"/>
-            <h1 className="text-xl font-semibold flex-1">Dashboard</h1>
+            <h1 className="text-xl font-semibold flex-1"></h1>
+            <Button func={logoutMutation} icon="logout"/>
             <Button func={toggleBottomDrawer} icon="up"/>
             <Button func={toggleRightSidebar} icon="settings"/>
           </div>
@@ -91,31 +107,37 @@ export default function MainContent({isMobile,  isLoaded,  toggleLeftSidebar,  t
 
                         {/* Main Content */}
                         <div className="p-6">
-                          {/* If there is an error than this will show the error. */}
-                          {error && (
+                          {error2 && (
                             <div className="mb-6 p-4 bg-red-700 border border-red-200 rounded-lg flex items-center gap-3">
                               <AlertCircle className="w-5 h-5 text-white" />
-                              <span className="text-white">{error}</span>
+                              <span className="text-white">{error2}</span>
                             </div>
                           )}
 
 
-                          {/* Video Preview */}
-                          <div className="mb-6">
+                          <div className="mb-6  relative"> 
                             <video
                               ref={videoRef}
                               autoPlay
                               muted
-                              playsInline            //  [#1f1e1e]
-                              className="w-full max-w-2xl mx-auto rounded-lg shadow-lg bg-[#1f1e1e]     scale-x-[-1]"
+                              playsInline
+                              className="w-full max-w-7xl mx-auto rounded-lg shadow-lg bg-[#1f1e1e] scale-x-[-1]"
                             />
+
+                            {(isPending || error) && (
+                              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white/10 bg-opacity-50 rounded-lg">
+                                  {isPending     &&      <Loader  text="Creating Folder for Podcast" />}
+                                  {error    &&           <Loader isError="true"   text = "Something went wrong"/>}
+                              </div>
+                            )}
                           </div>
+
 
                           {/* Recording Controls */}
                           <div className="flex flex-col items-center gap-4 mb-6 ">
 
                             {/* Device Controls    [#282727]*/}
-                            <div className=" flex flex-wrap gap-2 sm:gap-4 justify-center bg-[#1f1e1e] border-white/10 border-1 pl-4 pr-4 p-2 rounded-full">
+                            <div className=" bg-[#1f1e1e]    flex flex-wrap gap-2 sm:gap-4 justify-center  border-white/10 border-1 pl-4 pr-4 p-2 rounded-full">
 
                                 {buttons.map((info, index) => (
                                     <button
@@ -123,7 +145,7 @@ export default function MainContent({isMobile,  isLoaded,  toggleLeftSidebar,  t
                                       onClick={info.func}
                                       // if the user is recording or the camera/min are not selected then disable the Start Recording Button 
                                       disabled={info.disable}
-                                      className={`flex items-center   border-1 border-white/20   cursor-pointer      px-2.5 py-2.5  sm:px-4 sm:py-4 rounded-full   ${info.clas}`}
+                                      className={`flex items-center disabled:text-black   disabled:bg-white backdrop-blur-lg  bg-black-100  text-white hover:text-black hover:bg-white   border-1 border-white/20   cursor-pointer      px-2.5 py-2.5  sm:px-4 sm:py-4 rounded-full   ${info.clas}`}
                                     >
                                       {info.icon}
                                     </button>
@@ -132,14 +154,12 @@ export default function MainContent({isMobile,  isLoaded,  toggleLeftSidebar,  t
                             </div>
 
                             {/* Status and Timer */}
-                            <div className="text-center">
-                              <div className={`text-lg font-semibold ${
-                                isRecording ? (isPaused ? 'text-yellow-600' : 'text-[#40E0D0]') : 'text-green-600'
-                              }`}>
+                            <div className="text-center text-white">
+                              <div>
                                 {status}
                               </div>
                               {isRecording && (
-                                <div className={`text-2xl font-mono mt-2 ${isPaused ? 'text-yellow-600' : 'text-[#40E0D0]'}`}>
+                                <div className={`text-2xl font-mono mt-2 `}>
                                   {formatTime(recordingTime)} {isPaused && '(Paused)'}
                                 </div>
                               )}
