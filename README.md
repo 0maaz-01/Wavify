@@ -4,12 +4,16 @@
 ## Screenshots & Demo 📸
 
 ### 💻 Desktop View
+<img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/J.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/M.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/K.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/L.png" alt="Thumbnail" width="320" height="180">
+<img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/N.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/A.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/B.png" alt="Thumbnail" width="320" height="180">
+<img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/C.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/D.jpg" alt="Thumbnail" width="320" height="180"><img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/E.jpg" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/F.jpg" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/I.png" alt="Thumbnail" width="320" height="180">  
 
-<img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/A.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/B.png" alt="Thumbnail" width="320" height="180">
-<img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/C.png" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/D.jpg" alt="Thumbnail" width="320" height="180"><img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/E.jpg" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/F.jpg" alt="Thumbnail" width="320" height="180"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/I.png" alt="Thumbnail" width="320" height="180">
+
 
   
 ### 📱 Mobile View
+<img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/JM.jpg" alt="Thumbnail" width="220" height="500"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/LM.jpg" alt="Thumbnail" width="220" height="500"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/IM.jpg" alt="Thumbnail" width="220" height="500"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/KM.jpg" alt="Thumbnail" width="220" height="500">
+
 
 <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/AM.jpg" alt="Thumbnail" width="220" height="500"> <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/BM.jpg" alt="Thumbnail" width="220" height="500"><img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/CM.jpg" alt="Thumbnail" width="220" height="500"><img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/DM.jpg" alt="Thumbnail" width="220" height="500"><img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/EM.jpg" alt="Thumbnail" width="220" height="500">
 <img src="https://github.com/0maaz-01/Wavify/blob/main/ReadMe/FM.jpg" alt="Thumbnail" width="220" height="500">
