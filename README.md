@@ -53,9 +53,6 @@ This platform allows users to:
   Provides an overview of Wavify, its features, and how it works.
   Acts as the main entry point for new users.
 
-* **Dashboard 🏠**
-  Manage your podcasts, view your recordings, and collaborate with teammates.
-
 * **Recording Studio 🎙️**
   Start or join podcasts with up to 6 participants (video + audio).
   Sessions are recorded in real time, crash-proof, and saved both locally and to the cloud.
@@ -74,7 +71,7 @@ This platform allows users to:
   At the start of recording, users choose a folder where chunks are stored.
   Recordings are organized and retrieved based on these folders.
 
-* **Recordings Library 🎥**
+* **File Page 🎥**
   Access HD video, raw chunks, and audio files for editing or publishing.
 
 * **Team Sharing Page 🤝**
@@ -97,14 +94,6 @@ This platform allows users to:
 * Secure login & signup.
 * Role-based access for podcasters & team editors.
 * JWT-protected routes.
-
----
-
-## 📦 Future Enhancements
-
-* 🎛️ Built-in editing tools.
-* 📢 Direct podcast publishing to platforms (Spotify, Apple Podcasts, etc.).
-* 🎨 Custom branding for podcasters.
 
 ---
 
