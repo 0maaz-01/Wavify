@@ -6,6 +6,7 @@ This platform allows users to:
 
 * Record high-quality podcasts directly through the website.
 * Host podcasts with **1–6 participants** (video + audio).
+* Record solo podcasts with a dedicated interface.
 * Receive **HD video files, raw video chunks, and audio tracks** after the session.
 * Share recordings and raw chunks with teammates for collaborative editing.
 * Stream podcasts in real-time with adaptive quality.
@@ -23,6 +24,11 @@ This platform allows users to:
 
 * Up to **6 participants** can join with both video and audio.
 * Optimized for real-time streaming with low-quality fallback.
+
+🎤 **Solo Podcast Recording**
+
+* Dedicated page for single-person podcast sessions.
+* Ideal for creators who record monologues, voice-overs, or solo shows.
 
 📹 **High-Quality Output**
 
