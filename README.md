@@ -72,6 +72,11 @@ This platform allows users to:
   The host can start a live stream of the podcast.
   Hosts can **add or remove participants** during the stream.
 
+* **Single Person Recording Page 🎤**
+  A dedicated space for solo podcast recording.
+  Contains a bottom recording bar showing all sessions of the same podcast.
+  Users can preview, manage, and download solo podcast sessions.
+
 * **Folder Page 📂**
   Displays all folders containing podcast chunks.
   At the start of recording, users choose a folder where chunks are stored.
@@ -82,18 +87,6 @@ This platform allows users to:
 
 * **Team Sharing Page 🤝**
   Share recordings and raw chunks with teammates for collaborative editing.
-
----
-
-## 🚀 Tech Stack
-
-* **Frontend:** React.js / Next.js (for UI and recording studio)
-* **Backend:** Node.js / Express (for handling sessions & storage)
-* **Database:** MongoDB / PostgreSQL (for user & podcast metadata)
-* **Cloud Storage:** AWS S3 / Firebase / Cloudflare R2 (for recording assets)
-* **WebRTC + MediaRecorder API:** For real-time recording & streaming
-
----
 
 ## 🔐 Authentication
 
