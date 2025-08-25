@@ -1,5 +1,113 @@
+# 🎙️ Wavify
+
+A podcast recording and streaming platform designed to make podcasting simple, reliable, and collaborative. Wavify ensures your recordings are **crash-proof**—even if your network drops, the browser closes, or the device powers off. All recordings are securely stored in the browser and uploaded to the cloud in real-time, so your work is never lost.
+
+This platform allows users to:
+
+* Record high-quality podcasts directly through the website.
+* Host podcasts with **1–6 participants** (video + audio).
+* Receive **HD video files, raw video chunks, and audio tracks** after the session.
+* Share recordings and raw chunks with teammates for collaborative editing.
+* Stream podcasts in real-time with adaptive quality.
 
 ---
+
+## 🌟 Features & Highlights
+
+🎙️ **Crash-Proof Recording**
+
+* Safe even if the tab closes, network drops, or device restarts.
+* Browser-based storage with automatic cloud uploads.
+
+👥 **Multi-Participant Sessions**
+
+* Up to **6 participants** can join with both video and audio.
+* Optimized for real-time streaming with low-quality fallback.
+
+📹 **High-Quality Output**
+
+* Final recordings delivered in **HD video**.
+* Access to **raw video chunks** and **audio files** for post-production.
+
+🤝 **Team Collaboration**
+
+* Share raw chunks, full recordings, or audio-only versions with teammates.
+* Flexible access for editors to work on different aspects of the podcast.
+
+☁️ **Cloud Integration**
+
+* Real-time uploading ensures zero data loss.
+* All assets (video, audio, raw chunks) securely stored and accessible.
+
+---
+
+## 📄 Pages Overview
+
+* **Login Page 🔑**
+  Secure login for existing podcasters and teams.
+
+* **Signup Page 📝**
+  Easy onboarding with form validation and secure authentication.
+
+* **Landing Page 🌐**
+  Provides an overview of Wavify, its features, and how it works.
+  Acts as the main entry point for new users.
+
+* **Dashboard 🏠**
+  Manage your podcasts, view your recordings, and collaborate with teammates.
+
+* **Recording Studio 🎙️**
+  Start or join podcasts with up to 6 participants (video + audio).
+  Sessions are recorded in real time, crash-proof, and saved both locally and to the cloud.
+
+* **Preview Podcast Page 👀**
+  Allows users to **preview the entire podcast** before downloading or sharing.
+  Includes a **Recording Bar** at the bottom showing different recording sessions from the same podcast.
+  Users can view or download podcasts recorded across multiple sittings.
+
+* **Streaming Page 📡**
+  The host can start a live stream of the podcast.
+  Hosts can **add or remove participants** during the stream.
+
+* **Folder Page 📂**
+  Displays all folders containing podcast chunks.
+  At the start of recording, users choose a folder where chunks are stored.
+  Recordings are organized and retrieved based on these folders.
+
+* **Recordings Library 🎥**
+  Access HD video, raw chunks, and audio files for editing or publishing.
+
+* **Team Sharing Page 🤝**
+  Share recordings and raw chunks with teammates for collaborative editing.
+
+---
+
+## 🚀 Tech Stack
+
+* **Frontend:** React.js / Next.js (for UI and recording studio)
+* **Backend:** Node.js / Express (for handling sessions & storage)
+* **Database:** MongoDB / PostgreSQL (for user & podcast metadata)
+* **Cloud Storage:** AWS S3 / Firebase / Cloudflare R2 (for recording assets)
+* **WebRTC + MediaRecorder API:** For real-time recording & streaming
+
+---
+
+## 🔐 Authentication
+
+* Secure login & signup.
+* Role-based access for podcasters & team editors.
+* JWT-protected routes.
+
+---
+
+## 📦 Future Enhancements
+
+* 🎛️ Built-in editing tools.
+* 📢 Direct podcast publishing to platforms (Spotify, Apple Podcasts, etc.).
+* 🎨 Custom branding for podcasters.
+
+---
+
 
 ## Screenshots & Demo 📸
 
